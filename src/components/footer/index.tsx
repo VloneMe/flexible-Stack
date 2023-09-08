@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '../Container';
 import Image from 'next/image';
-import logo from '../../public/logo-purple.svg';
+import logo from '/public/logo-purple.svg';
 import { FooterColumn } from './FooterColumn';
 import { footerLinks } from '@/constants';
 

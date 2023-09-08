@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from "@/public/logo.svg";
+import logo from "/public/logo.svg";
 import { Container } from '../Container';
 import { NavLinks } from '@/constants';
 import { AuthProviders } from '../AuthProviders';
+import { getCurrentUser } from '../../../lib/session';
 
-export const Navbar = () => {
-  const session = {}
+export const Navbar = async () => {
+  
+  const session = await getCurrentUser();
+
   return (
     <nav className='flex h-[60px] w-full border-b'>
       <Container className="flex">
@@ -32,9 +35,16 @@ export const Navbar = () => {
         </div>
 
         <div className='flex justify-center items-center gap-5 text-base'>
-          {session ? (
+          {session?.user ? (
             <>
-              UserPhoto
+              {session?.user?.image && (
+                <Image src={session.user.image}
+                        width={40}
+                        height={40}
+                        alt={session.user.name}
+                        className='rounded-full'
+                /> 
+              )}
 
               <Link href='/create-project'>
                 ShareWork
